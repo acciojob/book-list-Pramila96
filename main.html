@@ -1,16 +1,68 @@
 <!DOCTYPE html>
-
+<!DOCTYPE html>
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <title>MyBookList</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    .delete {
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1>MyBookList</h1>
+  
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" id="title">
+    <label for="author">Author:</label>
+    <input type="text" id="author">
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn">
+    <button id="submit">Submit</button>
+  </div>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN#</th>
+      </tr>
+    </thead>
+    <tbody id="book-list"></tbody>
+  </table>
 
+  <script>
+    // Add event listener to the submit button
+    document.getElementById('submit').addEventListener('click', function() {
+      // Get input values
+      var title = document.getElementById('title').value;
+      var author = document.getElementById('author').value;
+      var isbn = document.getElementById('isbn').value;
+
+      // Create a new row with the entered data
+      var newRow = document.createElement('tr');
+      newRow.innerHTML = '<td>' + title + '</td><td>' + author + '</td><td>' + isbn + '</td><td class="delete">Clear</td>';
+
+      // Add the new row to the table body
+      document.getElementById('book-list').appendChild(newRow);
+
+      // Clear input fields
+      document.getElementById('title').value = '';
+      document.getElementById('author').value = '';
+      document.getElementById('isbn').value = '';
+    });
+
+    // Add event listener to the table body to handle delete button clicks
+    document.getElementById('book-list').addEventListener('click', function(event) {
+      // Check if the clicked element has the delete class
+      if (event.target.classList.contains('delete')) {
+        // Remove the entire row
+        event.target.parentElement.remove();
+      }
+    });
+  </script>
 </body>
-
 </html>
